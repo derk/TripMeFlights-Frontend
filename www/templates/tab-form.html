@@ -1,23 +1,27 @@
-<ion-view view-title="Form">
+<ion-view view-title="Search for Flights">
   <ion-content class="padding">
   <form ng-submit="submit()">
     <div class="list">
       <label class="item item-input">
+        <span class="input-label">Departing Airport</span>
         <input type="text" placeholder="Departing Airport" ng-model="airport">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="Maximum Price" ng-model="price">
+        <span class="input-label">Maximum Price ($)</span>
+        <input type="text" ng-model="price"> 
       </label>
       <label class="item item-input">
-        <input type="date" placeholder="Depart" ng-model="startDate">
+        <span class="input-label">Depart</span>
+        <input type="date" ng-model="startDate">
       </label>
-      <label class="item item-input">
-        <input type="date" placeholder="Return" ng-model="endDate">
+       <label class="item item-input">
+        <span class="input-label">Return</span>
+        <input type="date" ng-model="endDate">
       </label>
     </div>
     <div class="padding">
       <button class="button button-full button-positive">
-        Submit      
+        TRIP ME!      
       </button>
       {{test}}
     </div>
