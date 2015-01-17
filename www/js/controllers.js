@@ -1,11 +1,16 @@
-angular.module('starter.controllers', ['ui.router'])
+angular.module('starter.controllers', ['ionic', 'ui.router'])
 
-.controller('FormCtrl', function($scope, $http, $state,$ionicViewSwitcher, $filter) {
+.controller('FormCtrl', function($scope, $http, $state,$ionicViewSwitcher, $ionicLoading, $filter) {
   $scope.airport = 'DTW';
   $scope.price = 300;
-  $scope.startDate = 'Mar 01, 2015';
-  $scope.endDate = 'Mar 10, 2015';
   $scope.submit = function(){
+       $ionicLoading.show({
+          content: 'Loading',
+          animation: 'fade-in',
+          showBackdrop: true,
+          maxWidth: 200,
+          showDelay: 0
+        });
     $scope.results = [];
     this.startDate = $filter('date')(this.startDate,'yyyy-MM-dd');
     this.endDate = $filter('date')(this.startDate,'yyyy-MM-dd');
@@ -13,6 +18,7 @@ angular.module('starter.controllers', ['ui.router'])
     $http.get($scope.url)
     .then(function (resp){
       console.log('Success', resp);
+      $ionicLoading.hide();
       $ionicViewSwitcher.nextDirection('forward');
       $state.go('tab.search', {results : JSON.stringify(resp.data)});
     }, function(err){
