@@ -1,0 +1,10 @@
+<ion-view view-title="Search">
+  <ion-content>
+    <ion-list>
+          <ion-item ng-repeat="result in results">
+              <h2>Flight to {{result.city}}<h2> [{{result.airport}}]
+              <h3>${{result.price | number:0}}
+          </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
