@@ -1,5 +1,9 @@
 <ion-view view-title="Search for Flights">
-  <ion-content class="padding">
+  <ion-content class="padding form">
+  <div class="padding center">
+    <h2>TripMe Flights</h2>
+    <h3>Find the best vacations at the best price</h3>
+  </div>
   <form ng-submit="submit()">
     <div class="list">
       <label class="item item-input">
@@ -18,13 +22,19 @@
         <span class="input-label">Return</span>
         <input type="date" ng-model="endDate">
       </label>
+      <li class="item item-checkbox item-checkbox-right">
+         <label class="checkbox">
+           <input type="checkbox" ng-model="filterSpirit">
+         </label>
+         Filter Spirit
+      </li>
     </div>
-    <div class="padding cta">
+    <div class="padding center">
       <button class="button button button-clear button-positive">
         Trip Me!      
       </button>
     </div>
-    <div class="padding">
+    <div class="padding center">
       {{error}}
     </div>
   </form>

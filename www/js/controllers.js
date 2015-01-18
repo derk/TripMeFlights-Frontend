@@ -24,6 +24,7 @@ angular.module('starter.controllers', ['ionic', 'ui.router'])
   $scope.error = "";
   $scope.airport = 'DTW';
   $scope.price = 300;
+  $scope.filterSpirit = false;
   $scope.submit = function(){
        $ionicLoading.show({
           content: 'Loading',
@@ -34,9 +35,9 @@ angular.module('starter.controllers', ['ionic', 'ui.router'])
         });
     $scope.results = [];
     this.startDate = $filter('date')(this.startDate,'yyyy-MM-dd');
-    this.endDate = $filter('date')(this.startDate,'yyyy-MM-dd');
+    this.endDate = $filter('date')(this.endDate,'yyyy-MM-dd');
     if(this.startDate && this.endDate){
-      $scope.url = 'http://tripmeflights.herokuapp.com/search?airport=' + this.airport + '&price=' + this.price + '&startDate=' + this.startDate + '&endDate=' + this.endDate;
+      $scope.url = 'http://localhost:3000/search?airport=' + this.airport + '&price=' + this.price + '&startDate=' + this.startDate + '&endDate=' + this.endDate + "&filterSpirit=" + this.filterSpirit;
       $http.get($scope.url)
       .then(function (resp){
         console.log('Success', resp);

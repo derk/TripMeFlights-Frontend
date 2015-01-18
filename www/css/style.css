@@ -1,4 +1,7 @@
-/* Empty. Add your own CSS if you like */
-.padding.cta{
+.padding.form{
+	margin-top:10%;
+}
+
+.padding.center{
 	text-align:center;
 }
