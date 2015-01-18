@@ -1,5 +1,25 @@
 angular.module('starter.controllers', ['ionic', 'ui.router'])
 
+
+.directive('dragBack', function($ionicGesture, $state) {
+  return {
+    restrict : 'EAC',
+    link : function(scope, elem, attr) {
+      
+      console.log("Dragback Link");
+      
+      $ionicGesture.on('swiperight', function(event) {
+      
+        console.log('Got swiped!');
+        event.preventDefault();
+        window.history.back();
+        
+      }, elem);
+      
+    }
+  }  
+})
+
 .controller('FormCtrl', function($scope, $http, $state,$ionicViewSwitcher, $ionicLoading, $filter) {
   $scope.airport = 'DTW';
   $scope.price = 300;
@@ -22,6 +42,8 @@ angular.module('starter.controllers', ['ionic', 'ui.router'])
       $ionicViewSwitcher.nextDirection('forward');
       $state.go('tab.search', {results : JSON.stringify(resp.data)});
     }, function(err){
+      $ionicLoading.hide();
+      $scope.error = "Sorry, there was an error with your search. Please try again!";
       console.log('ERR', err);
     })
   }

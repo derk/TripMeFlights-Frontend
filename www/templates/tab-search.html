@@ -1,7 +1,7 @@
 <ion-view view-title="Results for {{results[0].airportFROM}}">
   <ion-nav-buttons side="primary">
-      <button class="button" ng-click="goBack()">
-        <i class="ion-chevron-left" a></i>
+      <button class="button button-clear button-positive" ng-click="goBack()">
+        <i class="ion-chevron-left"></i> Search
       </button>
   </ion-nav-buttons>
   <ion-content>
@@ -9,7 +9,7 @@
           <ion-item class="search-result" ng-repeat="result in results">
               <h2>Flight to {{result.city}}<h2> [{{result.airportDEST}}]
               <h3>${{result.price | number:0}}</h3>
-              <button class="button button-positive" style="float:right" ng-click="openLink(result.url)">
+              <button class="button button-clear button-positive" style="float:right" ng-click="openLink(result.url)">
                 Book Flight             
               </button>
           </ion-item>
