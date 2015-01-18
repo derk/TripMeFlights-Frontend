@@ -21,6 +21,7 @@ angular.module('starter.controllers', ['ionic', 'ui.router'])
 })
 
 .controller('FormCtrl', function($scope, $http, $state,$ionicViewSwitcher, $ionicLoading, $filter) {
+  $scope.error = "";
   $scope.airport = 'DTW';
   $scope.price = 300;
   $scope.submit = function(){
@@ -34,18 +35,24 @@ angular.module('starter.controllers', ['ionic', 'ui.router'])
     $scope.results = [];
     this.startDate = $filter('date')(this.startDate,'yyyy-MM-dd');
     this.endDate = $filter('date')(this.startDate,'yyyy-MM-dd');
-    $scope.url = 'http://tripmeflights.herokuapp.com/search?airport=' + this.airport + '&price=' + this.price + '&startDate=' + this.startDate + '&endDate=' + this.endDate;
-    $http.get($scope.url)
-    .then(function (resp){
-      console.log('Success', resp);
+    if(this.startDate && this.endDate){
+      $scope.url = 'http://tripmeflights.herokuapp.com/search?airport=' + this.airport + '&price=' + this.price + '&startDate=' + this.startDate + '&endDate=' + this.endDate;
+      $http.get($scope.url)
+      .then(function (resp){
+        console.log('Success', resp);
+        $ionicLoading.hide();
+        $ionicViewSwitcher.nextDirection('forward');
+        $state.go('tab.search', {results : JSON.stringify(resp.data)});
+      }, function(err){
+        $ionicLoading.hide();
+        $scope.error = "Sorry, there was an error with your search. Please try again!";
+        console.log('ERR', err);
+      })
+    }
+    else{
       $ionicLoading.hide();
-      $ionicViewSwitcher.nextDirection('forward');
-      $state.go('tab.search', {results : JSON.stringify(resp.data)});
-    }, function(err){
-      $ionicLoading.hide();
-      $scope.error = "Sorry, there was an error with your search. Please try again!";
-      console.log('ERR', err);
-    })
+      $scope.error = "Please enter a valid date";
+    }
   }
 })
 
